@@ -21,13 +21,11 @@ class App extends React.Component {
     }
 
 
-    render() {
-        console.log(this.state.initialBoard)
-        
+    render() {   
         return (
             <div className="App">
                 <h1>Sudoku</h1>
-                <Board newGame={this.state.initialBoard} actualBoard={this.state.board}/>
+                <Board newGame={this.state.initialBoard} actualBoard={this.state.board.split("")}/>
                 <div className="buttons">
                     <button>Check</button>
                     <button onClick={this.handleChange}>New Game</button>
