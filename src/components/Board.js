@@ -10,34 +10,32 @@ class Board extends React.Component {
         }; 
     }
 
-    toValueTile(val, idTile) {
+   /*  toValueTile(ValueTile) {
         this.setState({
-            valueTile: val,
-            id: idTile
+            valueTile: ValueTile.value,
+            id: ValueTile.id
         });
-    }
+    } */
    
 
     render() {
-        console.log(this.state.valueTile)
+        let addValueTile2 = this.props.addValueTile
         let actBoard = this.props.actualBoard;
         let board = actBoard.map(function(el, id){
             
             if (isNaN(el)) {
-                return (<label key={id}>
-                    <Tile idBoard={id} inputValue={el} dis={false}/>
-                    </label>
+                return (
+                    <Tile idBoard={id} inputValue={el} dis={false} addValueTile={addValueTile2}/> 
                 )  
             }
             else {
-            return (<label key={id}>
-                <Tile idBoard={id} inputValue={el} dis={true} />
-                </label>
+            return (
+                <Tile idBoard={id} inputValue={el} dis={true} addValueTile={addValueTile2}/>  
             )
             }
         })
         return (
-            <Tile valueTile={this.toValueTile}/>,
+            
             board
         )
 
