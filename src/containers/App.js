@@ -14,6 +14,7 @@ class App extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.addValueTile = this.addValueTile.bind(this);
         this.handleCheck = this.handleCheck.bind(this);
+        this.hendleRestart = this.hendleRestart.bind(this);
     }
     handleChange(event) {
         let newSudoku = sudoku.generate("easy")
@@ -33,13 +34,19 @@ class App extends React.Component {
             })
         }
 
-    handleCheck(){
+    handleCheck() {
         let getTempBoard = this.state.tempBoard;
         this.setState({
             board: getTempBoard
         })
     }
-        
+    
+    hendleRestart() {
+        this.setState({
+            board: this.state.initialBoard,
+            tempBoard: this.state.initialBoard,
+        })
+    }
     
     
 
@@ -53,7 +60,7 @@ class App extends React.Component {
                     <button onClick={this.handleCheck}>Check</button>
                     <button onClick={this.handleChange}>New Game</button>
                     <button>Solve</button>
-                    <button>Restart</button>
+                    <button onClick={this.hendleRestart}>Restart</button>
                 </div>
             </div>
         )

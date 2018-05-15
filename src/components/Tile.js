@@ -23,23 +23,14 @@ class Tile extends React.Component {
             id: event.target.id
         };
         this.props.addValueTile(valueTile)
-        
+       
     }
-
-   /*  handleSubmit(event) {
-        const ValueTile = {
-            value: this.state.value,
-            id: this.state.id
-        };
-        console.log(this.props.valueTile);
-        this.props.valueTile(ValueTile);
-      }; */
 
     render() {
         
         return (
             <label key={this.props.idBoard} >
-                <input id={this.props.idBoard} type="number" min="1" max="9" value={this.state.value} onChange={this.handleChange} disabled={this.props.dis}/>
+                <input style={this.props.style} id={this.props.idBoard} type="number" min="1" max="9" value={this.state.value} onChange={this.handleChange} disabled={this.props.dis}/>
             </label>
         )
     }
