@@ -1,15 +1,16 @@
 import React from 'react';
+import EventEmitterMixin, {eventEmitter} from 'react-event-emitter-mixin';
 
 class Tile extends React.Component {
+    
     constructor(props) {
         super(props);
         this.state = {
             value: this.props.inputValue,
             id: ''
         };
-
         this.handleChange = this.handleChange.bind(this);
-        
+        /* this.eventEmitter = this.eventEmitter.bind(this); */
     }
     handleChange(event) {
         event.preventDefault();
@@ -25,6 +26,27 @@ class Tile extends React.Component {
         this.props.addValueTile(valueTile)
        
     }
+
+    componentWillMount(){
+        eventEmitter('on','eventB',()=>{
+            this.setState({
+                value: this.props.inputValue,
+                id: ''
+            })
+        });
+        
+    }
+
+   /*  static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.inputValue !== prevState.inputValue) {
+            null
+          };
+       
+        return {
+            value: nextProps.inputValue
+        }
+        
+    } */
 
     render() {
         

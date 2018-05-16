@@ -2,6 +2,7 @@ import React from 'react';
 import style from './App.css';
 import sudoku from 'sudoku-umd';
 import Board from '../components/Board';
+import EventEmitterMixin, {eventEmitter} from 'react-event-emitter-mixin';
 
 class App extends React.Component {
     constructor(props) {
@@ -42,10 +43,12 @@ class App extends React.Component {
     }
     
     hendleRestart() {
+        
         this.setState({
             board: this.state.initialBoard,
             tempBoard: this.state.initialBoard,
         })
+        eventEmitter('emit','eventB');
     }
     
     

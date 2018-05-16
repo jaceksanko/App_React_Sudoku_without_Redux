@@ -11,12 +11,12 @@ class Board extends React.Component {
             
             if (isNaN(el)) {
                 return (
-                    <Tile  idBoard={id} inputValue={el} dis={false} addValueTile={addValueTile} /> 
+                    <Tile key={id} idBoard={id} inputValue={el} dis={false} addValueTile={addValueTile} /> 
                 )  
             }
             else {
                 return (
-                    <Tile style={style} idBoard={id} inputValue={el} dis={true} addValueTile={addValueTile}/>  
+                    <Tile key={id} style={style} idBoard={id} inputValue={el} dis={true} addValueTile={addValueTile}/>  
                 )
             }
         })
