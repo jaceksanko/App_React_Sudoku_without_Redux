@@ -6,12 +6,14 @@ class Board extends React.Component {
     render() {
         let addValueTile = this.props.addValueTile
         let actBoard = this.props.actualBoard;
+        let resetTile = this.props.resetTile;
+        let afterRestartTile = this.props.afterRestartTile
         let style = {color: 'red'}
         let board = actBoard.map(function(el, id){
             
             if (isNaN(el)) {
                 return (
-                    <Tile key={id} idBoard={id} inputValue={el} dis={false} addValueTile={addValueTile} /> 
+                    <Tile key={id} idBoard={id} inputValue={el} dis={false} addValueTile={addValueTile} resetTile={resetTile} afterRestartTile={afterRestartTile}/> 
                 )  
             }
             else {

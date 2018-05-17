@@ -2,7 +2,6 @@ import React from 'react';
 import style from './App.css';
 import sudoku from 'sudoku-umd';
 import Board from '../components/Board';
-import EventEmitterMixin, {eventEmitter} from 'react-event-emitter-mixin';
 
 class App extends React.Component {
     constructor(props) {
@@ -16,13 +15,15 @@ class App extends React.Component {
         this.addValueTile = this.addValueTile.bind(this);
         this.handleCheck = this.handleCheck.bind(this);
         this.hendleRestart = this.hendleRestart.bind(this);
+        this.afterRestartTile = this.afterRestartTile.bind(this);
     }
     handleChange(event) {
         let newSudoku = sudoku.generate("easy")
         this.setState({
             initialBoard: newSudoku,
             board: newSudoku,
-            tempBoard: newSudoku
+            tempBoard: newSudoku,
+            resetTile: false
         });
     };
     
@@ -47,18 +48,22 @@ class App extends React.Component {
         this.setState({
             board: this.state.initialBoard,
             tempBoard: this.state.initialBoard,
+            resetTile: true
         })
-        eventEmitter('emit','eventB');
     }
     
-    
+    afterRestartTile() {
+        this.setState({
+            resetTile: false
+        })
+    }
 
 
     render() {   
         return (
             <div className="App">
                 <h1>Sudoku</h1>
-                <Board newGame={this.state.initialBoard.split("")} actualBoard={this.state.board.split("")} addValueTile={this.addValueTile}/>
+                <Board newGame={this.state.initialBoard.split("")} actualBoard={this.state.board.split("")} addValueTile={this.addValueTile} resetTile={this.state.resetTile} afterRestartTile={this.afterRestartTile}/>
                 <div className="buttons">
                     <button onClick={this.handleCheck}>Check</button>
                     <button onClick={this.handleChange}>New Game</button>
