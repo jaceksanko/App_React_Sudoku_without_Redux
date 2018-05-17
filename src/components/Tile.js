@@ -32,14 +32,14 @@ class Tile extends React.Component {
             value: nextProps.inputValue,
             id: ''
             })
-        }
+        };
         if (nextProps.resetTile === true) {
             this.setState({
                 value: '',
                 id: ''   
             })
             this.props.afterRestartTile()
-        }
+        };
     }
 
     render() {

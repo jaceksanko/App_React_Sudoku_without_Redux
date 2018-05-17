@@ -9,7 +9,8 @@ class App extends React.Component {
         this.state = {
             initialBoard: '',
             board: '',
-            tempBoard: ''
+            tempBoard: '',
+            resetTile: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.addValueTile = this.addValueTile.bind(this);
@@ -17,14 +18,17 @@ class App extends React.Component {
         this.hendleRestart = this.hendleRestart.bind(this);
         this.afterRestartTile = this.afterRestartTile.bind(this);
     }
+
+    
     handleChange(event) {
         let newSudoku = sudoku.generate("easy")
         this.setState({
             initialBoard: newSudoku,
             board: newSudoku,
             tempBoard: newSudoku,
-            resetTile: false
+            
         });
+
     };
     
     addValueTile(valueTile) {
@@ -44,7 +48,6 @@ class App extends React.Component {
     }
     
     hendleRestart() {
-        
         this.setState({
             board: this.state.initialBoard,
             tempBoard: this.state.initialBoard,
