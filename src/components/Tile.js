@@ -14,7 +14,7 @@ class Tile extends React.Component {
     }
     handleChange(event) {
         event.preventDefault();
-        if (event.target.value > 0 && event.target.value <= 9 ) {
+        if (event.target.value > 0 && event.target.value <= 9 && isNaN(event.target.value) === false ) {
            this.setState({
             value: event.target.value,
             id: event.target.id
