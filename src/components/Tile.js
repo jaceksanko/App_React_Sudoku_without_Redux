@@ -7,6 +7,7 @@ class Tile extends React.Component {
         this.state = {
             value: this.props.inputValue,
             id: ''
+
         };
         this.handleChange = this.handleChange.bind(this);
         
@@ -27,19 +28,22 @@ class Tile extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.inputValue !== this.props.inputValue) {
+        if (nextProps.inputValue !== this.props.inputValue ) {           
             this.setState({
-            value: nextProps.inputValue,
-            id: ''
+                value: nextProps.inputValue,
+                id: ''
             })
         };
+
+
         if (nextProps.resetTile === true) {
             this.setState({
                 value: '',
                 id: ''   
             })
-            this.props.afterRestartTile()
         };
+
+        
     }
 
     render() {

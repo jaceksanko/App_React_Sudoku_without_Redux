@@ -16,19 +16,19 @@ class App extends React.Component {
         this.addValueTile = this.addValueTile.bind(this);
         this.handleCheck = this.handleCheck.bind(this);
         this.hendleRestart = this.hendleRestart.bind(this);
-        this.afterRestartTile = this.afterRestartTile.bind(this);
+       
     }
 
     
     handleChange(event) {
+        this.hendleRestart()
         let newSudoku = sudoku.generate("easy")
         this.setState({
             initialBoard: newSudoku,
             board: newSudoku,
             tempBoard: newSudoku,
-            
+            resetTile: true
         });
-
     };
     
     addValueTile(valueTile) {
@@ -36,7 +36,8 @@ class App extends React.Component {
             boardArray[valueTile.id] = valueTile.value;
             let boardString = boardArray.join('');
             this.setState({
-                tempBoard: boardString
+                tempBoard: boardString,
+                resetTile: false
             })
         }
 
@@ -55,18 +56,11 @@ class App extends React.Component {
         })
     }
     
-    afterRestartTile() {
-        this.setState({
-            resetTile: false
-        })
-    }
-
-
     render() {   
         return (
             <div className="App">
                 <h1>Sudoku</h1>
-                <Board newGame={this.state.initialBoard.split("")} actualBoard={this.state.board.split("")} addValueTile={this.addValueTile} resetTile={this.state.resetTile} afterRestartTile={this.afterRestartTile}/>
+                <Board newGame={this.state.initialBoard.split("")} actualBoard={this.state.board.split("")} addValueTile={this.addValueTile} resetTile={this.state.resetTile} />
                 <div className="buttons">
                     <button onClick={this.handleCheck}>Check</button>
                     <button onClick={this.handleChange}>New Game</button>

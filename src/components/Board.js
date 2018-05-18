@@ -13,7 +13,7 @@ class Board extends React.Component {
             
             if (isNaN(el)) {
                 return (
-                    <Tile key={id} idBoard={id} inputValue={el} dis={false} addValueTile={addValueTile} resetTile={resetTile} afterRestartTile={afterRestartTile}/> 
+                    <Tile key={id} idBoard={id} inputValue={''} dis={false} addValueTile={addValueTile} resetTile={resetTile} /> 
                 )  
             }
             else {
