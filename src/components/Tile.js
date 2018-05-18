@@ -14,7 +14,8 @@ class Tile extends React.Component {
     }
     handleChange(event) {
         event.preventDefault();
-        this.setState({
+        if (event.target.value > 0 && event.target.value <= 9 ) {
+           this.setState({
             value: event.target.value,
             id: event.target.id
         })
@@ -23,7 +24,14 @@ class Tile extends React.Component {
             value: event.target.value,
             id: event.target.id
         };
-        this.props.addValueTile(valueTile)
+        this.props.addValueTile(valueTile) 
+        }
+        else {
+            this.setState({
+                value: '',
+                id: ''   
+            })
+        }
        
     }
 

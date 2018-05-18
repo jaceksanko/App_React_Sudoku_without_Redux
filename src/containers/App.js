@@ -2,6 +2,8 @@ import React from 'react';
 import style from './App.css';
 import sudoku from 'sudoku-umd';
 import Board from '../components/Board';
+import swal from 'sweetalert';
+
 
 class App extends React.Component {
     constructor(props) {
@@ -12,7 +14,7 @@ class App extends React.Component {
             tempBoard: '',
             resetTile: false
         };
-        this.handleChange = this.handleChange.bind(this);
+        this.handleNewGame = this.handleNewGame.bind(this);
         this.addValueTile = this.addValueTile.bind(this);
         this.handleCheck = this.handleCheck.bind(this);
         this.hendleRestart = this.hendleRestart.bind(this);
@@ -20,7 +22,7 @@ class App extends React.Component {
     }
 
     
-    handleChange(event) {
+    handleNewGame(event) {
         this.hendleRestart()
         let newSudoku = sudoku.generate("easy")
         this.setState({
@@ -43,9 +45,19 @@ class App extends React.Component {
 
     handleCheck() {
         let getTempBoard = this.state.tempBoard;
-        this.setState({
-            board: getTempBoard
-        })
+        let solve = sudoku.solve(getTempBoard);
+        if (solve === false) {
+            swal("Przykto mi.", "Sudoku nie da się rozwiązać. Gdzieś jest błąd.", "error");
+            this.handleNewGame();
+        }
+        else {
+            this.setState({
+                board: getTempBoard
+            })
+            swal("Gratuluję!", "Sudoku jest poprawnie rozwiązane", "success");
+            this.handleNewGame();
+        }
+        
     }
     
     hendleRestart() {
@@ -63,8 +75,8 @@ class App extends React.Component {
                 <Board newGame={this.state.initialBoard.split("")} actualBoard={this.state.board.split("")} addValueTile={this.addValueTile} resetTile={this.state.resetTile} />
                 <div className="buttons">
                     <button onClick={this.handleCheck}>Check</button>
-                    <button onClick={this.handleChange}>New Game</button>
-                    <button>Solve</button>
+                    <button onClick={this.handleNewGame}>New Game</button>
+                    <button >Solve</button>
                     <button onClick={this.hendleRestart}>Restart</button>
                 </div>
             </div>
