@@ -1,0 +1,115 @@
+input {
+    height: 30px;
+    width: 30px;
+    padding: 5px;
+    text-align: center;
+    color: black;
+    font-size: 1rem;
+    border: 1px solid black;
+}
+
+.App {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.board {
+    text-align: center;
+    width: 396px;
+}
+
+.close {
+    background-color: rgb(146, 185, 77);
+    color: brown;
+}
+
+.open {
+    background-color: darkseagreen;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[id="0"], input[id="1"], input[id="2"], input[id="3"], input[id="4"], input[id="5"], input[id="6"], input[id="7"], input[id="8"] {
+    border-top: 2px solid red;
+}
+
+input[id="0"], input[id="9"], input[id="18"], input[id="27"], input[id="36"], input[id="45"], input[id="54"], input[id="63"], input[id="72"] {
+    border-left: 2px solid red;
+} 
+
+input[id="72"], input[id="73"], input[id="74"], input[id="75"], input[id="76"], input[id="77"], input[id="78"], input[id="79"], input[id="80"],
+input[id="18"], input[id="19"], input[id="20"], input[id="21"], input[id="22"], input[id="23"], input[id="24"], input[id="25"], input[id="26"],
+input[id="45"], input[id="46"], input[id="47"], input[id="48"], input[id="49"], input[id="50"], input[id="51"], input[id="52"], input[id="53"]
+{
+    border-bottom: 2px solid red;
+}
+
+input[id="8"], input[id="17"], input[id="26"], input[id="35"], input[id="44"], input[id="53"], input[id="62"], input[id="71"], input[id="80"],
+input[id="2"], input[id="11"], input[id="20"], input[id="29"], input[id="38"], input[id="47"], input[id="56"], input[id="65"], input[id="74"],
+input[id="5"], input[id="14"], input[id="23"], input[id="32"], input[id="41"], input[id="50"], input[id="59"], input[id="68"], input[id="77"] {
+    border-right: 2px solid red;
+}
+
+button {
+    background-color: brown;
+    color: white;
+    padding: 10px;
+    margin: 15px;
+    border: 1px solid brown;
+    transition: all 1s;
+    
+}
+
+button:hover {
+    background-color: white;
+    color: brown;
+    cursor: pointer;
+}
+
+button:focus, input:focus {
+    outline: none;
+}
+
+input:focus {
+    background-color: rgb(232, 255, 194);
+}
+
+.modal > .close {
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    padding: 2px 5px;
+    line-height: 20px;
+    right: -10px;
+    top: -10px;
+    font-size: 24px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid #cfcece; 
+  }
+
+  .modal .header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  .modal .content {
+    font-size: 1.2rem;
+    text-align: center;
+    }
+
+  .actions {
+    text-align: center;
+    
+  }
+  .content li {
+      text-align: left;
+  } 
+  .content ul {
+     margin: 20px 200px;
+      
+  }

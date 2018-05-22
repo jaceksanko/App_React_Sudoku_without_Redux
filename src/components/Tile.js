@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 class Tile extends React.Component {
     
     constructor(props) {
@@ -58,7 +59,7 @@ class Tile extends React.Component {
         
         return (
             <label key={this.props.idBoard} >
-                <input style={this.props.style} id={this.props.idBoard} type="number" min="1" max="9" value={this.state.value} onChange={this.handleChange} disabled={this.props.dis}/>
+                <input className={this.props.style} id={this.props.idBoard} type="number" min="1" max="9" value={this.state.value} onChange={this.handleChange} disabled={this.props.dis}/>
             </label>
         )
     }
