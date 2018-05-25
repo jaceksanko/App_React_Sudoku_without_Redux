@@ -19,37 +19,37 @@ class App extends React.Component {
         this.handleNewGameHard = this.handleNewGameHard.bind(this);
         this.addValueTile = this.addValueTile.bind(this);
         this.handleCheck = this.handleCheck.bind(this);
-        this.hendleRestart = this.hendleRestart.bind(this);
+        this.handleRestart = this.handleRestart.bind(this);
         this.handleSolve = this.handleSolve.bind(this);
-        this.hendleSave = this.hendleSave.bind(this);
-        this.hendleLoad = this.hendleLoad.bind(this);
+        this.handleSave = this.handleSave.bind(this);
+        this.handleLoad = this.handleLoad.bind(this);
     }
 
-    hendleSave() {
+    handleSave() {
         localStorage.setItem('initialBoard', this.state.initialBoard);
         localStorage.setItem('board', this.state.board);
         localStorage.setItem('tempBoard', this.state.tempBoard);
         localStorage.setItem('resetTile', this.state.resetTile);
+        swal("Stan gry został zapisany","", "success");
     }
 
-    hendleLoad() {
+    handleLoad() {
         let saveInitialBoard = localStorage.getItem('initialBoard');
         let saveBoard = localStorage.getItem('board');
         let saveTempBoard = localStorage.getItem('tempBoard');
         let saveresetTile = localStorage.getItem('resetTile')
-        console.log(saveBoard)
         this.setState({
             initialBoard: saveInitialBoard,
             board: saveBoard,
             tempBoard: saveTempBoard,
             resetTile: saveresetTile
-        })       
+        })
+        swal("Zapisany stan gry został wczytany","", "success");     
     }
 
-    
-    handleNewGameEasy() {
-        this.hendleRestart()
-        let newSudoku = sudoku.generate("easy")
+    newGame(gameLevel) {
+        this.handleRestart()
+        let newSudoku = sudoku.generate(gameLevel)
         this.setState({
             initialBoard: newSudoku,
             board: newSudoku,
@@ -57,29 +57,19 @@ class App extends React.Component {
             resetTile: true,
             solve: ''
         });
-        
+    }
+
+
+    handleNewGameEasy() {        
+        this.newGame("easy");
     };
+
     handleNewGameMedium() {
-        this.hendleRestart()
-        let newSudoku = sudoku.generate("medium")
-        this.setState({
-            initialBoard: newSudoku,
-            board: newSudoku,
-            tempBoard: newSudoku,
-            resetTile: true,
-            solve: ''
-        });
+        this.newGame("medium");  
     };
+
     handleNewGameHard() {
-        this.hendleRestart()
-        let newSudoku = sudoku.generate("hard")
-        this.setState({
-            initialBoard: newSudoku,
-            board: newSudoku,
-            tempBoard: newSudoku,
-            resetTile: true,
-            solve: ''
-        });
+        this.newGame("hard");
     };
     
     addValueTile(valueTile) {
@@ -92,38 +82,44 @@ class App extends React.Component {
             })
         }
 
-    handleSolve() {
+    solveCheck(solveFalse, solveCheck) {
         let getTempBoard = this.state.tempBoard;
         let board = this.state.initialBoard;
         let solve = sudoku.solve(getTempBoard);
         if (solve === false || getTempBoard === board) {
-            swal("Przykto mi.", "Sudoku nie da się rozwiązać. Gdzieś jest błąd. Spróbuj nową grę.", "error");
-            this.hendleRestart()
+            swal(solveFalse.head, solveFalse.text, solveFalse.type);
+            this.handleRestart()
         }
-        
         else {
-            this.setState({
-                board: getTempBoard
-            })
+            solveCheck
             swal("Gratuluję!", "Sudoku jest poprawnie rozwiązane", "success");
             
         }
+    }
+
+    handleSolve() {
+        let solveFalse = {
+            head: "Przykro mi.", 
+            text: "Sudoku nie da się rozwiązać. Gdzieś jest błąd. Spróbuj nową grę.",
+            type: "error"};
+        let solveCheck = this.setState({
+                board: this.state.tempBoard
+            })
+        this.solveCheck(solveFalse, solveCheck);
         
     }
 
     handleCheck() {
-        let getTempBoard = this.state.tempBoard;
-        let board = this.state.initialBoard;
-        let solve = sudoku.solve(getTempBoard);
-        if (solve === false || getTempBoard === board) {
-            swal("Gdzieś masz błąd.", "Próbuj dalej.", "warning");
-        }
-        else {
-            swal("Gratuluję!", "Sudoku jest poprawnie rozwiązane", "success");
-        }
+        let solveFalse = {
+            head: "Gdzieś masz błąd.", 
+            text: "Próbuj dalej.",
+            type: "warning"};
+        
+        this.solveCheck(solveFalse);
+        
     }
     
-    hendleRestart() {
+    handleRestart() {
         this.setState({
             board: this.state.initialBoard,
             tempBoard: this.state.initialBoard,
@@ -190,9 +186,9 @@ class App extends React.Component {
                         )}
                     </Popup>
                     <button onClick={this.handleSolve}>Solve</button>
-                    <button onClick={this.hendleRestart}>Restart</button>
-                    <button onClick={this.hendleSave}>Save Game</button>
-                    <button onClick={this.hendleLoad}>Load Save</button>
+                    <button onClick={this.handleRestart}>Restart</button>
+                    <button onClick={this.handleSave}>Save Game</button>
+                    <button onClick={this.handleLoad}>Load Save</button>
                 </div>
             </div>
         )

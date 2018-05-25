@@ -10,18 +10,16 @@ class Board extends React.Component {
         let resetTile = this.props.resetTile;
         let afterRestartTile = this.props.afterRestartTile
         let tempBoard = this.props.tempBoard
-        let classOpen = 'open';
-        let classClose = 'close';
         let board = actBoard.map(function(el, id){
             
             if (isNaN(el)) {
                 return (
-                    <Tile key={id} style={classOpen}  idBoard={id} inputValue={tempBoard[id]} dis={false} addValueTile={addValueTile} resetTile={resetTile} /> 
+                    <Tile key={id} style={'open'}  idBoard={id} inputValue={tempBoard[id]} dis={false} addValueTile={addValueTile} resetTile={resetTile} /> 
                 )  
             }
             else {
                 return (
-                    <Tile key={id} style={classClose} idBoard={id} inputValue={el} dis={true} addValueTile={addValueTile}/>  
+                    <Tile key={id} style={'close'} idBoard={id} inputValue={el} dis={true} addValueTile={addValueTile}/>  
                 )
             }
         })
